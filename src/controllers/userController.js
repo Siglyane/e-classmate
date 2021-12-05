@@ -1,6 +1,6 @@
 const Users = require("../models/user");
 
-const creatUser = async (req, res) => {
+const createUser = async (req, res) => {
   try{
     const user = await Users.create(req.body);
     return res.status(200).json({
@@ -15,5 +15,5 @@ const creatUser = async (req, res) => {
 }
 
 module.exports = {
-  creatUser
+  createUser
 }
