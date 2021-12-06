@@ -1,7 +1,8 @@
 const Users = require("../models/user");
 
-const createUser = async (req, res) => {
-  try{
+
+const createUser =  async (req, res) => {
+  try{  
     const user = await Users.create(req.body);
     user.password = undefined;
 
