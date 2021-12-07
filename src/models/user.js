@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: true,
+    required: [true, "E-mail é obrigatório"],
     unique: true,
     lowercase: true,
     trim: true
@@ -21,10 +21,25 @@ const userSchema = new mongoose.Schema({
     // não retorna essa informação quando procura pelo usuário
     select: false
   },
+  gender: {
+    type: String,
+    enum: ['mulher cisgênero', 'homem cisgênero', 'mulher transgênero',
+            'homem transgênero', 'não binário', 'outro', 'prefiro não responder'],
+    default: 'prefiro não responder'
+  },
+  sexuality: {
+    type: String,
+    enum: ['heterossexual', 'homossexual', 'bissexual', 'assexual',
+       'pansexual', 'prefiro não responder'],
+    default: 'prefiro não responder'
+  },
+  recommendation: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'recommendation'
+  }
   },{
     //Automaticamente gerencia data de criação e de updated
     timestamps: true,
-    versionKey: false
   })
 
 const User = mongoose.model("User", userSchema);
