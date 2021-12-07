@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 //Informações da sala de aula
 const classroomSchema = new mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
+  id: mongoose.Schema.Types.ObjectId,
   name: {
     type: String,
     required:true
