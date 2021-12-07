@@ -9,13 +9,13 @@ const createUser =  async (req, res) => {
     return res.status(200).json({
       message: "Usuario cadastrado com sucesso",
       user
-    })
+    });
   } catch (err) {
     return res.status(500).json({
       message: err.message
-    })
+    });
   }
-}
+};
 
 module.exports = {
   createUser
