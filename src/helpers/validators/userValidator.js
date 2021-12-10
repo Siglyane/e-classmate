@@ -9,7 +9,7 @@ const validateUser = [
     .isEmail()
     .trim()
     .notEmpty()
-    //Entender o noormalize e-mail
+    //Entender o normalize e-mail e se deve ser utilizado
     .normalizeEmail()
     .withMessage("Informe um e-mail válido"),
   check("password")

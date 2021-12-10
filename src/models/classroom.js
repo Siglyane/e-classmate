@@ -21,9 +21,7 @@ const ClassroomSchema = new mongoose.Schema({
     max: 500,
     default: 500
   },
-  //Cria em enum como teste, alterar para Array
-  // olhar possibilidade de criar uma banco de dados de opções
-  // Deveria dividir tanto? Talvez somente criar tags seja o suficiente
+
   languages: {
     type: String,
     enum: ["java","javascript", "lua", "ruby"],
