@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const recommendationSchema = mongoose.Schema({
+const RecommendationSchema = mongoose.Schema({
   id: mongoose.Schema.Types.ObjectId,
   recommendation: {
     type: String,
@@ -8,10 +8,14 @@ const recommendationSchema = mongoose.Schema({
   }, 
   userRecommended: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user'
+    ref: 'User'
   },
   userRecommending: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user'
+    ref: 'User'
   }
 })
+
+const Recommendation = mongoose.model('Recommendation', RecommendationSchema);
+
+module.exports = Recommendation;

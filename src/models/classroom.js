@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 //Informações da sala de aula
-const classroomSchema = new mongoose.Schema({
+const ClassroomSchema = new mongoose.Schema({
   id: mongoose.Schema.Types.ObjectId,
   name: {
     type: String,
@@ -9,7 +9,7 @@ const classroomSchema = new mongoose.Schema({
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user'
+    ref: 'User'
   },
   url: {
     type: String,
@@ -33,13 +33,13 @@ const classroomSchema = new mongoose.Schema({
     type: Array,
     required: true
   },
-  usersLoggedIn: {
+  usersLoggedIn: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user'
-  }
+    ref: 'User'
+  }]
 
 }, {timestamps: true})
 
-const Classroom = mongoose.model("Classroom", classroomSchema);
+const Classroom = mongoose.model("Classroom", ClassroomSchema);
 
 module.exports = Classroom

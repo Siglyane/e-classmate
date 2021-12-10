@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
+const ClassroomSchema = require("../models/classroom")
 
 //Informações do usuario 
-const userSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
   id: mongoose.Schema.Types.ObjectId,
   name: {
     type: String,
@@ -31,15 +32,15 @@ const userSchema = new mongoose.Schema({
        'pansexual', 'prefiro não responder'],
     default: 'prefiro não responder'
   },
-  recommendation: {
+  recommendation: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'recommendation'
-  }
+    ref: 'Recommendation'
+  }]
   },{
     //Automaticamente gerencia data de criação e de updated
     timestamps: true,
   })
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("User", UserSchema);
 
 module.exports = User
