@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
-const ClassroomSchema = require("../models/classroom")
 
-//Informações do usuario 
 const UserSchema = new mongoose.Schema({
   id: mongoose.Schema.Types.ObjectId,
   name: {
@@ -12,13 +10,11 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: [true, "E-mail é obrigatório"],
     unique: true,
-    lowercase: true,
   },
   password: {
     type:String,
     required: true,
-    // não retorna essa informação quando procura pelo usuário
-    select: false
+    select: false // Don't return password when listed
   },
   gender: {
     type: String,
@@ -37,8 +33,7 @@ const UserSchema = new mongoose.Schema({
     ref: 'Recommendation'
   }]
   },{
-    //Automaticamente gerencia data de criação e de updated
-    timestamps: true,
+    timestamps: true, //automatically manage createdAt and updatedAt
   })
 
 const User = mongoose.model("User", UserSchema);

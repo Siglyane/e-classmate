@@ -23,6 +23,7 @@ const createClassroom = async (req, res) => {
   }
 };
 
+
 const getAll = async (req, res) => {
   try {
     const classroomRequired = await Classroom.find().populate('createdBy');

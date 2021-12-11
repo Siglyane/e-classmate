@@ -17,13 +17,12 @@ const createUser =  async (req, res) => {
       message: "Usuario cadastrado com sucesso",
       user
     });
-  } catch (err) {
+  } catch (error) {
     return res.status(500).json({
-      message: err.message
+      message: error.message
     });
   }
 };
-
 
 const login = async (req, res) => {
   const {email, password} = req.body;
@@ -40,14 +39,12 @@ const login = async (req, res) => {
     return res.status(404)
   }
 
-
   const secret = process.env.SECRET;
   const token = jwt.sign(
     { id: userRequired._id}, secret)
 
   return res.status(200).json({message: "Auth", token});
 }
-
 
 const getAll = async (req, res) => {
   try {
@@ -61,12 +58,11 @@ const getAll = async (req, res) => {
   }
 }
 
-
 const getById = async (req, res) => {
   try{
     const userRequired =  await Users.findById(req.params.id, '-password')
     return res.status(200).json(userRequired)
-  }catch(error){
+  } catch(error){
     res.status(500).json({
         message: error.message,
     })
@@ -74,9 +70,44 @@ const getById = async (req, res) => {
 
 };
 
+const updatedUSer = async (req, res) => {
+  try {
+    const userRequired = await Users.findById(req.userId);
+
+    userRequired.name = req.body.name || userRequired.name
+    userRequired.email = req.body.email || userRequired.email
+    userRequired.gender = req.body.gender || userRequired.gender
+    userRequired.sexuality = req.body.sexuality || userRequired.sexuality
+
+    const userSaved = await userRequired.save()
+    res.status(200).json({
+      user: userSaved
+    })
+
+  } catch(error){
+    res.status(500).json({
+        message: error.message,
+    })
+  }
+};
+
+const deleteUser = async (req, res) => {
+  try {
+    const userRequired = await Users.findByIdAndDelete(req.userId);
+    res.status(200).json({
+      user: userRequired
+    })
+  } catch(error){
+    res.status(500).json({
+        message: error.message,
+    })
+  }
+}
 module.exports = {
   createUser,
   login,
   getAll,
-  getById
+  getById,
+  updatedUSer,
+  deleteUser
 }

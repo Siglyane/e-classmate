@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-//Informações da sala de aula
+
 const ClassroomSchema = new mongoose.Schema({
   id: mongoose.Schema.Types.ObjectId,
   name: {
@@ -15,16 +15,15 @@ const ClassroomSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  maxOccupation: {
+  maxParticipants: {
     type: Number,
     min: 2,
-    max: 500,
-    default: 500
+    max: 100, // based on Google Meet and Zoom max participants
+    default: 100
   },
-
   languages: {
     type: String,
-    enum: ["java","javascript", "lua", "ruby"],
+    enum: ["c", "java", "python", "javascript", "lua", "ruby", "c++", "c#"],
     required:true
   },
   subject: {

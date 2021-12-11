@@ -1,14 +1,44 @@
+/* Imports */
 const express = require("express");
 const router = express.Router();
 const controller = require("../controllers/userController");
 const validator = require("../helpers/validators/userValidator");
 const { checkAuth } = require("../middlewares/auth");
 
+/*@route POST /user/create
+ *@desc Create new user
+ *@access Public
+ */
+router.post("/create", validator, controller.createUser);
 
-router.route("/create").post(validator, controller.createUser);
+/*@route POST /user/login
+ *@desc Access account 
+ *@access Public
+ */
 router.post("/login", controller.login);
 
-router.get("/all", controller.getAll);
+/*@route GET /user/all
+ *@desc List all users registred
+ *@access Private
+ */
+router.get("/all", checkAuth, controller.getAll);
+
+/*@route GET
+ *@desc Return user profile based on id
+ *@acess Private
+ */
 router.get("/:id", checkAuth, controller.getById);
+
+/*@route 
+ *@desc 
+ *@access 
+ */
+router.put("/update", checkAuth, validator, controller.updatedUSer);
+
+/*@route 
+ *@desc 
+ *@access 
+ */
+router.delete("/delete", checkAuth, controller.deleteUser);
 
 module.exports = router;
