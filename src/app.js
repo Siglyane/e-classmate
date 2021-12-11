@@ -19,7 +19,7 @@ app.use(express.json());
 console.log("app")
 
 // routes
-app.use("/", )
+app.use("/", index);
 app.use("/user", userRoutes);
 app.use("/class", classroomRoutes);
 
