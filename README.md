@@ -1,4 +1,4 @@
-# Turma Digital
+# e-classmate
 
 
 ## Sobre o Projeto
