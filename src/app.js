@@ -26,4 +26,3 @@ dotenv.config();
 db.connect();
 
 module.exports = app;
-
