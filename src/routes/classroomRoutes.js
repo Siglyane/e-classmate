@@ -17,4 +17,10 @@ router.post("/create", checkAuth, validator, controller.createClassroom);
  */
 router.get("/all", controller.getAll);
 
+/*@route POST /class/login/:id
+ *@desc 
+ *@access Private
+ */
+router.post("/login/:id", checkAuth, controller.loginClassroomById);
+
 module.exports = router;

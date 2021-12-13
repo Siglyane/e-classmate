@@ -4,6 +4,7 @@ const { hashPassword } = require("../helpers/auth");
 const jwt = require("jsonwebtoken")
 
 
+// Create user and hash password
 const createUser =  async (req, res) => {
   try{  
     const body = req.body
@@ -24,6 +25,7 @@ const createUser =  async (req, res) => {
   }
 };
 
+// Check password informed and return token
 const login = async (req, res) => {
   const {email, password} = req.body;
 
@@ -46,6 +48,8 @@ const login = async (req, res) => {
   return res.status(200).json({message: "Auth", token});
 }
 
+// List all users 
+// TODO: Verificar se dentro das minhas regras de negocios deveria ter esse metodo
 const getAll = async (req, res) => {
   try {
     const userRequired = await Users.find();
@@ -58,6 +62,7 @@ const getAll = async (req, res) => {
   }
 }
 
+// Return user based on id requested
 const getById = async (req, res) => {
   try{
     const userRequired =  await Users.findById(req.params.id, '-password').populate('recommendation')
@@ -70,6 +75,7 @@ const getById = async (req, res) => {
 
 };
 
+// Updated informations based on currently logged id
 const updatedUSer = async (req, res) => {
   try {
     const userRequired = await Users.findById(req.userId);
@@ -91,6 +97,7 @@ const updatedUSer = async (req, res) => {
   }
 };
 
+// Delete user based on currently logged id
 const deleteUser = async (req, res) => {
   try {
     const userRequired = await Users.findByIdAndDelete(req.userId);
@@ -103,6 +110,7 @@ const deleteUser = async (req, res) => {
     })
   }
 }
+
 module.exports = {
   createUser,
   login,

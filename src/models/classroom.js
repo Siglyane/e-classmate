@@ -33,7 +33,11 @@ const ClassroomSchema = new mongoose.Schema({
   usersLoggedIn: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
-  }]
+  }],
+  online: {
+    type: Boolean,
+    default: true
+  }
 
 }, {timestamps: true})
 
