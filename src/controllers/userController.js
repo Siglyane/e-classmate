@@ -60,7 +60,7 @@ const getAll = async (req, res) => {
 
 const getById = async (req, res) => {
   try{
-    const userRequired =  await Users.findById(req.params.id, '-password')
+    const userRequired =  await Users.findById(req.params.id, '-password').populate('recommendation')
     return res.status(200).json(userRequired)
   } catch(error){
     res.status(500).json({
