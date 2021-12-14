@@ -1,7 +1,7 @@
 // Imports dependency
 const express = require("express");
 const cors = require("cors");
-const dotenv = require("dotenv-safe");
+require("dotenv-safe").config();
 
 //Imports database
 const db = require("./database/mongoConfig");
@@ -14,6 +14,8 @@ const recommendationRoutes = require("./routes/recommendationRoutes");
 
 const app = express();
 
+db.connect();
+
 app.use(cors());
 app.use(express.json());
 
@@ -24,8 +26,5 @@ app.use("/user", userRoutes);
 app.use("/class", classroomRoutes);
 app.use("/recomm", recommendationRoutes);
 
-dotenv.config();
-
-db.connect();
 
 module.exports = app;
