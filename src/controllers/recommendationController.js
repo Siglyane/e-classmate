@@ -2,6 +2,7 @@ const Recommendation = require("../models/recommendation");
 const User = require("../models/user");
 
 
+// Create a recommendation based on id send
 const createRecommendation = async (req, res) => {
   try {
     const recommendation = req.body;

@@ -2,7 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const controller = require("../controllers/userController");
-const validator = require("../helpers/validators/userValidator");
+const validator = require("../middlewares/validators/userValidator");
 const { checkAuth } = require("../middlewares/auth");
 
 /*@route POST /user/create
@@ -23,19 +23,19 @@ router.post("/login", controller.login);
  */
 router.get("/all", checkAuth, controller.getAll);
 
-/*@route GET
+/*@route GET /user/:id
  *@desc Return user profile based on id
  *@acess Private
  */
 router.get("/:id", checkAuth, controller.getById);
 
-/*@route 
+/*@route PUT /user/update
  *@desc 
  *@access 
  */
 router.put("/update", checkAuth, validator, controller.updatedUSer);
 
-/*@route 
+/*@route DELETE /user/delete
  *@desc 
  *@access 
  */
