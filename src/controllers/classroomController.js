@@ -3,7 +3,6 @@ const Classroom = require("../models/classroom");
 
 // Create a classroom
 const createClassroom = async (req, res) => {
-
   try{
     const body = req.body;
     body.createdBy = req.userId;
@@ -23,6 +22,7 @@ const createClassroom = async (req, res) => {
   }
 };
 
+// Login a classroom with currently user and return url to reunion
 const loginClassroomById = async (req, res) => {
   try {
     const classroomRequested = await Classroom.findById(req.params.id);
@@ -47,15 +47,36 @@ const loginClassroomById = async (req, res) => {
   }
 }
 
-// Return all classroom
+// Return all classroom online
 const getAll = async (req, res) => {
   try {
-    const classroomRequired = await Classroom.find().populate('createdBy').select('-url');
+    const classroomRequired = await Classroom.find({online: true}).populate('createdBy').select('-url').exec();
     return res.status(200).json(classroomRequired);
 
   } catch(error){
     res.status(500).json({
-        message: error.message,
+        message: error.message
+    })
+  }
+}
+
+// Change status to offline by classroom id [online: false]
+const classroomOffline = async (req, res) => {
+  try {
+    const classroomRequired = await Classroom.findById(req.params);
+
+    if (classroomRequired.createdBy != req.userId) {
+      return res.status(403).json({message: "Você não possui autorização"})
+    }
+
+    classroomRequired.online = false;
+    classroomRequired.save();
+
+    return res.status(200).json(classroomRequired);
+
+  } catch(error){
+    res.status(500).json({
+        message: error.message
     })
   }
 }
@@ -63,5 +84,6 @@ const getAll = async (req, res) => {
 module.exports = {
   createClassroom,
   getAll,
-  loginClassroomById
+  loginClassroomById,
+  classroomOffline
 }

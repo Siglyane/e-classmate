@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const ClassroomSchema = new mongoose.Schema({
   id: mongoose.Schema.Types.ObjectId,
-  name: {
+  description: {
     type: String,
     required:true
   },
@@ -23,7 +23,8 @@ const ClassroomSchema = new mongoose.Schema({
   },
   languages: {
     type: String,
-    enum: ["c", "java", "python", "javascript", "lua", "ruby", "c++", "c#"],
+    enum: ["c", "java", "python", "javascript", "lua", "ruby", "c++", "c#", "kotlin", "swift", "go", "dart", "rust", "php",
+     ".net", "sql", "perl", "matlab", "typescript", "ada", "julia", "cobol", "r", "assembly", "groovy", "delphi", "visual basic"],
     required:true
   },
   subject: {

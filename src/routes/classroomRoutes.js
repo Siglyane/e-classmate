@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const controller = require("../controllers/classroomController");
-const validator = require("../helpers/validators/classroomValidator");
+const validator = require("../middlewares/validators/classroomValidator");
 const { checkAuth } = require("../middlewares/auth");
 
 
@@ -22,5 +22,11 @@ router.get("/all", controller.getAll);
  *@access Private
  */
 router.post("/login/:id", checkAuth, controller.loginClassroomById);
+
+/*@route PATCH /class/offline/:id
+ *@desc 
+ *@access Private
+ */
+router.patch("/offline", checkAuth, controller.classroomOffline);
 
 module.exports = router;
