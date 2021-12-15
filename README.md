@@ -30,31 +30,35 @@ Cada sala possui linguagens e assuntos definidos para os usuários pesquisarem e
 ```
  📁 reprograma-e-classmate
    |
-   |-  📁 src
-   |    |
-   |    |- 📁 controllers
-   |         |- 📑 classroomController.js
-   |         |- 📑 userController.js
-   |         |- 📑 .js 
+   |- 📁 src
+   |   |
+   |   |- 📁 controllers
+   |       |- 📑 classroomController.js
+   |       |- 📑 recommendationController.js 
+   |       |- 📑 userController.js
    |
-   |    |- 📁 database
-   |         |- 📑 mongoConfig.js
+   |   |- 📁 database
+   |       |- 📑 mongoConfig.js
    |
-       |- 📁 helpers
-   |         |- 📑 auth.js
+   |   |- 📁 helpers
+   |       |- 📑 auth.js
    |
-       |- 📁 middlewares
-   |         |- 📑 auth.js
+   |   |- 📁 middlewares
+   |       |- 📁 validators.js
+   |           |- 📑 classroomValidator.js
+   |           |- 📑 userValidator.js
+   |       |- 📑 auth.js
    |
-   |    |- 📁 models
-   |         |- 📑 classroom.js
-   |         |- 📑 user.js
-   |         |- 📑 .js
+   |   |- 📁 models
+   |       |- 📑 classroom.js
+   |       |- 📑 recommendation.js
+   |       |- 📑 user.js
    |
    |    |- 📁 routes
-   |         |- 📑 clasroomRoutes.js 
-   |         |- 📑 userRoutes.js
-   |         |- 📑 .js
+   |       |- 📑 clasroomRoutes.js 
+   |       |- 📑 index.js
+   |       |- 📑 recommendationRoutes.js
+   |       |- 📑 userRoutes.js
    |
    |    |- 📑 app.js
    |
@@ -64,6 +68,7 @@ Cada sala possui linguagens e assuntos definidos para os usuários pesquisarem e
    |- 📑 .gitignore
    |- 📑 package-lock.json
    |- 📑 package.json
+   |- 📑 Procfile
    |- 📑 README.md
    |- 📑 server.js
    ```
@@ -80,21 +85,40 @@ Para a instalação do projeto siga as instruções:
 ### Rodando o Projeto
 1. Clone este projeto
 
-```$ git clone https://github.com/Siglyane/e-classmate.git```
+  ```$ git clone https://github.com/Siglyane/e-classmate.git```
 
 2. Acesse o repositório local
 
-``` cd e-classmate ```
+  ```$ cd e-classmate ```
 
 3. Instale as dependências
 
-```npm install```
+  ```$ npm install```
 
-4. Crie um arquivo ```.env``` conforme o ```.env.example``` e adicione as variáveis de ambiente. 
+4. Crie um arquivo ```.env``` conforme o ```.env.example``` e adicione os valores as variáveis de ambiente. 
 
 5. Execute o servidor
 
-```npm start```
+  ```$ npm start```
 
 ## Tecnologias
 
+Para construção desse projeto foi utilizado:
+- [JavaScript](https://www.javascript.com)
+- [Node.js](https://nodejs.org/en/)
+- [MongoDB](https://www.mongodb.com)
+- [Postman](https://www.postman.com)
+- [VSCode](https://code.visualstudio.com)
+- [heroku](https://id.heroku.com/login)
+
+### Pacotes Utilizados
+- [mongoose](https://mongoosejs.com)
+- [nodemon](https://nodemon.io)
+- [express](https://expressjs.com/pt-br/)
+- [cors](https://www.npmjs.com/package/cors)
+- [dotenv-safe](https://www.npmjs.com/package/dotenv-safe)
+- [bcrypt](https://www.npmjs.com/package/bcrypt)
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+- [express-validator](https://www.npmjs.com/package/express-validator)
+
+## Rotas e dados
