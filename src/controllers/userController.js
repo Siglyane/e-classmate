@@ -48,20 +48,6 @@ const login = async (req, res) => {
   return res.status(200).json({message: "Auth", token});
 }
 
-// List all users 
-// TODO: Verificar se dentro das minhas regras de negocios deveria ter esse metodo
-const getAll = async (req, res) => {
-  try {
-    const userRequired = await Users.find();
-    return res.status(200).json(userRequired);
-
-  } catch(error){
-    res.status(500).json({
-        message: error.message,
-    })
-  }
-}
-
 // Return user based on id requested
 const getById = async (req, res) => {
   try{
@@ -80,10 +66,11 @@ const updatedUSer = async (req, res) => {
   try {
     const userRequired = await Users.findById(req.userId);
 
-    userRequired.name = req.body.name || userRequired.name
-    userRequired.email = req.body.email || userRequired.email
-    userRequired.gender = req.body.gender || userRequired.gender
-    userRequired.sexuality = req.body.sexuality || userRequired.sexuality
+    const {name, email, gender, sexuality} = req.body
+    userRequired.name = name || userRequired.name
+    userRequired.email = email || userRequired.email
+    userRequired.gender = gender || userRequired.gender
+    userRequired.sexuality = sexuality || userRequired.sexuality
 
     const userSaved = await userRequired.save()
     res.status(200).json({
