@@ -38,6 +38,14 @@ const ClassroomSchema = new mongoose.Schema({
   online: {
     type: Boolean,
     default: true
+  },
+  onlyWoman: {
+    type: Boolean,
+    default: false
+  },
+  diverty: {
+    type: Boolean,
+    default:false
   }
 
 }, {timestamps: true})
