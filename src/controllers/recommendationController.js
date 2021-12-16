@@ -7,7 +7,6 @@ const createRecommendation = async (req, res) => {
   try {
     const recommendation = req.body;
     const userRecommendedId =  req.params.id
-    recommendation.userRecommended = userRecommendedId;
     recommendation.userRecommending = req.userId;
 
     const userRecommended = await User.findById(userRecommendedId);
@@ -16,8 +15,9 @@ const createRecommendation = async (req, res) => {
       return res.status(404).json({message: "Usuário não encontrado"})
     }
 
+    recommendation.userRecommended = userRecommendedId;
     const newRecommendation = await Recommendation.create(recommendation);
-    
+
     userRecommended.recommendation.push(newRecommendation);
     await userRecommended.save()
 
@@ -31,6 +31,38 @@ const createRecommendation = async (req, res) => {
   }
 }
 
+const updateRecommendation = async (req, res) => {
+  try{
+    const recommendationRequested = await Recommendation.findById(req.params.id)
+
+    if(!recommendationRequested) {
+      return res.status(404).json({message: "Recomendação não encontrada"});
+    }
+
+    if(recommendationRequested.userRecommending != req.userId) {
+      return res.status(403).json({message: "Você não possui autorização"})
+    }
+
+    recommendationRequested.recommendation = req.body.recommendation;
+    recommendationRequested.save();    
+
+    return res.status(200).send(recommendationRequested);
+
+  }catch (error) {
+    return res.status(500).json({message: error.message})
+  }
+}
+
+const deleteRecommendation = async (req, res) => {
+  try{
+
+  }catch (error) {
+    return res.status(500).json({message: error.message})
+  }
+}
+
 module.exports = {
-  createRecommendation
+  createRecommendation,
+  updateRecommendation,
+  deleteRecommendation
 }

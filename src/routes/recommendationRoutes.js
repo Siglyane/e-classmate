@@ -10,4 +10,10 @@ const validator = require("../middlewares/validators/recommendationValidator")
  */
 router.post("/create/:id", checkAuth, validator, controller.createRecommendation);
 
+/*@router POST /recomm/create/:id
+ *@desc Create a new recommendation based on id
+ *@access Private
+ */
+router.patch("/update/:id", checkAuth, validator, controller.updateRecommendation);
+
 module.exports = router;

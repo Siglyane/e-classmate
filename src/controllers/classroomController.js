@@ -65,7 +65,7 @@ const classroomOffline = async (req, res) => {
   try {
     const classroomRequired = await Classroom.findById(req.params);
 
-    if (classroomRequired.createdBy != req.userId) {
+    if(classroomRequired.createdBy != req.userId) {
       return res.status(403).json({message: "Você não possui autorização"})
     }
 
