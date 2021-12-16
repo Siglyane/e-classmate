@@ -24,14 +24,14 @@ router.post("/login", controller.login);
 router.get("/:id", checkAuth, controller.getById);
 
 /*@route PUT /user/update
- *@desc 
- *@access 
+ *@desc Update user profile based on body
+ *@access Private
  */
 router.put("/update", checkAuth, validator, controller.updatedUSer);
 
 /*@route DELETE /user/delete
- *@desc 
- *@access 
+ *@desc Delete user profile
+ *@access Private
  */
 router.delete("/delete", checkAuth, controller.deleteUser);
 
