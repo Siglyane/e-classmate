@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const ClassroomSchema = new mongoose.Schema({
   id: mongoose.Schema.Types.ObjectId,
-  description: {
+  name: {
     type: String,
     required:true
   },

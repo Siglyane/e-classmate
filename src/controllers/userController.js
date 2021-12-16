@@ -66,6 +66,7 @@ const updatedUSer = async (req, res) => {
   try {
     const userRequired = await Users.findById(req.userId);
 
+    
     const {name, email, gender, sexuality} = req.body
     userRequired.name = name || userRequired.name
     userRequired.email = email || userRequired.email

@@ -4,17 +4,27 @@ const validateUser = [
   check("name")
     .trim()
     .notEmpty()
-    .withMessage("Você deve informar seu nome"),
+    .isLength({min: 3})
+    .withMessage("Você deve informar seu nome")
+    .bail(),
   check("email")
-    .isEmail()
     .trim()
-    .notEmpty()
     .normalizeEmail()
-    .withMessage("Informe um e-mail válido"),
+    .isEmail()
+    .notEmpty()
+    .withMessage("Informe um e-mail válido")
+    .bail(),
   check("password")
     .notEmpty()
-    .isStrongPassword()
-    .withMessage("Senha muito fraca"),
+    .isStrongPassword({
+      minLength: 8,
+      maxLength: 20,
+      minUppercase: 1,
+      minLowercase: 1,
+      minNumbers: 1,
+      minSymbols: 1,
+    })
+    .withMessage("Senha muito fraca. sua senha deve conter de 6 a 20 caracteres entre letras, números e simbolos"),
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
