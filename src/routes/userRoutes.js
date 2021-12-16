@@ -17,12 +17,6 @@ router.post("/create", validator, controller.createUser);
  */
 router.post("/login", controller.login);
 
-/*@route GET /user/all
- *@desc List all users registred
- *@access Private
- */
-router.get("/all", checkAuth, controller.getAll);
-
 /*@route GET /user/:id
  *@desc Return user profile based on id
  *@acess Private

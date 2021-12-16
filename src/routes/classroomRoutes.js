@@ -11,6 +11,7 @@ const { checkAuth } = require("../middlewares/auth");
  */
 router.post("/create", checkAuth, validator, controller.createClassroom);
 
+
 /*@route GET /class/all
  *@desc List all classroom
  *@access Public
