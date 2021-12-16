@@ -31,14 +31,14 @@ const login = async (req, res) => {
 
   const userRequired = await Users.findOne({email: email}).select('+password');
 
-  if (!userRequired) {
-    return res.status(404);
-  }
+  // if (!userRequired) {
+  //   return res.status(404).json({message: "Usuário não encontrado"})
+  // }
 
   const checkPassword = await bcrypt.compare(password, userRequired.password);
 
-  if (!checkPassword) {
-    return res.status(404)
+  if (!checkPassword || !userRequired) {
+    return res.status(404).json({message: "Usuário ou senha incorreto"})
   }
 
   const secret = process.env.SECRET;
