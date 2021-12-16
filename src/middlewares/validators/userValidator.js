@@ -5,15 +5,15 @@ const validateUser = [
     .trim()
     .notEmpty()
     .isLength({min: 3})
-    .withMessage("Você deve informar seu nome")
-    .bail(),
+    .withMessage("Você deve informar seu nome"),
   check("email")
     .trim()
+    .notEmpty()
+    .withMessage("É obrigatorio informar um e-mail")
+    .bail()
     .normalizeEmail()
     .isEmail()
-    .notEmpty()
-    .withMessage("Informe um e-mail válido")
-    .bail(),
+    .withMessage("Informe um e-mail válido"),
   check("password")
     .notEmpty()
     .isStrongPassword({

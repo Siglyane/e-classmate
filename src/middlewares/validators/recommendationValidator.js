@@ -1,19 +1,10 @@
 const {check, validationResult} = require("express-validator");
 
 const validateClassroom = [
-  check("name")
+  check("recommendation")
   .trim()
   .notEmpty()
-  .isLength({min: 3})
-  .withMessage("Você deve informar um nome para a sala"),
-  check("url")
-  .trim()
-  .notEmpty()
-  .isURL()
-  .withMessage("Toda sala deve conter um link válido"),
-  check("subject")
-  .trim()
-  .notEmpty(),
+  .withMessage("Você deve adicionar uma recomendação!"),
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

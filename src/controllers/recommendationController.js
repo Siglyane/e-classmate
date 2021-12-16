@@ -10,10 +10,14 @@ const createRecommendation = async (req, res) => {
     recommendation.userRecommended = userRecommendedId;
     recommendation.userRecommending = req.userId;
 
-    const newRecommendation = await Recommendation.create(recommendation);
-
     const userRecommended = await User.findById(userRecommendedId);
 
+    if (!userRecommended) {
+      return res.status(404).json({message: "Usuário não encontrado"})
+    }
+
+    const newRecommendation = await Recommendation.create(recommendation);
+    
     userRecommended.recommendation.push(newRecommendation);
     await userRecommended.save()
 

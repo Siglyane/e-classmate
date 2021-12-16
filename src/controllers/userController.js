@@ -1,6 +1,6 @@
 const Users = require("../models/user");
 const bcrypt = require("bcrypt");
-const { hashPassword } = require("../helpers/auth");
+const { hashPassword} = require("../helpers/auth");
 const jwt = require("jsonwebtoken")
 
 
@@ -28,17 +28,17 @@ const createUser =  async (req, res) => {
 // Check password informed and return token
 const login = async (req, res) => {
   const {email, password} = req.body;
-
+  try{
   const userRequired = await Users.findOne({email: email}).select('+password');
 
-  // if (!userRequired) {
-  //   return res.status(404).json({message: "Usuário não encontrado"})
-  // }
+  if (!userRequired) {
+    return res.status(404).json({message: "Usuário não encontrado"})
+  }
 
   const checkPassword = await bcrypt.compare(password, userRequired.password);
 
-  if (!checkPassword || !userRequired) {
-    return res.status(404).json({message: "Usuário ou senha incorreto"})
+  if (!checkPassword) {
+    return res.status(404).json({message: "Senha incorreta"})
   }
 
   const secret = process.env.SECRET;
@@ -46,12 +46,20 @@ const login = async (req, res) => {
     { id: userRequired._id}, secret)
 
   return res.status(200).json({message: "Auth", token});
+} catch(error) {
+  return res.status(500).json({message: error.message})
+}
 }
 
 // Return user based on id requested
 const getById = async (req, res) => {
   try{
-    const userRequired =  await Users.findById(req.params.id, '-password').populate('recommendation')
+    const userRequired =  await Users.findById(req.params.id, '-password').populate('recommendation');
+
+    if (!userRequired) {
+      return res.status(404).json({message: "Usuário não encontrado"})
+    }
+
     return res.status(200).json(userRequired)
   } catch(error){
     res.status(500).json({
@@ -65,7 +73,6 @@ const getById = async (req, res) => {
 const updatedUSer = async (req, res) => {
   try {
     const userRequired = await Users.findById(req.userId);
-
     
     const {name, email, gender, sexuality} = req.body
     userRequired.name = name || userRequired.name
