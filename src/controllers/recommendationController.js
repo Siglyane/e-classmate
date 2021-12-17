@@ -23,7 +23,7 @@ const createRecommendation = async (req, res) => {
     await userRecommended.save()
 
 
-    res.status(200).json({message: "Recomendação cadastrada com sucesso", userRecommended});
+    res.status(201).json({message: "Recomendação cadastrada com sucesso", userRecommended});
 
   } catch (error) {
     res.status(500).json({

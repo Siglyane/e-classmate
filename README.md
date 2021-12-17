@@ -121,4 +121,44 @@ Para construção desse projeto foi utilizado:
 - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 - [express-validator](https://www.npmjs.com/package/express-validator)
 
-## Rotas e dados
+## Rotas
+
+### Rota inicial
+
+#### Localhost
+| Método HTTP  | Tipo Rota | Endpoint                     | Descrição                            |
+| ------------ | --------- | ---------------------------- | ------------------------------------ |
+| GET          | Pública   | `http://localhost:5000/`     |  Mensagem de apresentação (Index)    |
+
+#### Heroku
+| Método HTTP  | Tipo Rota | Endpoint                     | Descrição                            |
+| ------------ | --------- | ---------------------------- | ------------------------------------ |
+| GET          | Pública   | `e-classmate.herokuapp.com/` |  Mensagem de apresentação (Index)    |
+
+### Rotas usuários
+| Método HTTP  | Tipo Rota | Endpoint                | Descrição                                            |
+| ------------ | --------- | ----------------------- | -----------------------------------------------------|
+| POST         | Pública   | `/user/create`          | Cadastra um novo usário                              |
+| POST         | Pública   | `/user/login`           | Retorna token de login                               |
+| GET          | Privada   | `/user/:id`             | Retorna usuário conforme id                          |
+| PATCH        | Privada   | `/user/update`          | Atualiza cadastro de usuário logado                  |
+| DELETE       | Privada   | `/user/delete`          | Deleta cadastro de usuário logado                    |
+
+
+### Rotas salas
+
+| Método HTTP  | Tipo Rota | Endpoint                | Descrição                                            |
+| ------------ | --------- | ----------------------- | -----------------------------------------------------|
+| POST         | Privada   | `/class/create`         | Cadastra nova sala                                   |
+| GET          | Pública   | `/class/all`            | Retorna todas as salas online                        |
+| GET          | Pública   | `/class/filter`         | Retorna as salas conforme filtros passados           |
+| POST         | Privada   | `/class/login/:id`      | Usuário logado na API cadastra na sala               |
+| PATCH        | Privada   | `/class/offline/:id`    | Altera a sala para offline                           |
+
+### Rotas recomendações
+
+| Método HTTP  | Tipo Rota | Endpoint                | Descrição                                            |
+| ------------ | --------- | ----------------------- | -----------------------------------------------------|
+| POST         | Privada   | `/recomm/create/:id`    | Cadastra nova recomendação conforme id do usuário    |
+| PATCH        | Privada   | `/recomm/update/:id`    | Atualiza recomendação conforme id                    |
+| DELETE       | Privada   | `/recomm/delete/:id`    | Deleta recomendação conforme id                      |

@@ -12,7 +12,7 @@ const createClassroom = async (req, res) => {
     classroom.usersLoggedIn.push(req.userId);
     classroom.save()
 
-    return res.status(200).json({
+    return res.status(201).json({
       message: "Sala criada com sucesso",
       classroom
     })
