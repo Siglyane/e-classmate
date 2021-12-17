@@ -31,7 +31,11 @@ const UserSchema = new mongoose.Schema({
   recommendation: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Recommendation'
-  }]
+  }],
+  termsOfUse: {
+    type: Boolean,
+    default: false
+  }
   },{
     timestamps: true, //automatically manage createdAt and updatedAt
   })

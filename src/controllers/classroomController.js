@@ -1,5 +1,6 @@
 
 const Classroom = require("../models/classroom");
+const Users = require("../models/user")
 
 // Create a classroom
 const createClassroom = async (req, res) => {
@@ -12,7 +13,7 @@ const createClassroom = async (req, res) => {
     classroom.save()
 
     return res.status(200).json({
-      message: "Sala criada com sucesso", 
+      message: "Sala criada com sucesso",
       classroom
     })
   } catch (err) {
@@ -22,16 +23,26 @@ const createClassroom = async (req, res) => {
   }
 };
 
+//TODO: Arrumar erro
 // Login a classroom with currently user and return url to reunion
 const loginClassroomById = async (req, res) => {
   try {
     const classroomRequested = await Classroom.findById(req.params.id);
+
 
     const participantsLogged = classroomRequested.usersLoggedIn;
 
     if (participantsLogged.length >= classroomRequested.maxParticipants) {
      return res.status(403).json({message: "Sala cheia, novos participants não são permitidos."})
     }
+
+    const participant = await Users.findById(req.userId);
+
+    if (classroomRequested.onlyWoman == true 
+      && (participant.gender != "mulher cisgênero" 
+      || participant.gender != "mulher transgênero")) {
+        return res.status(403).json({message: "Você não pode acessar esta sala"})
+      }
 
     participantsLogged.push(req.userId);
     await classroomRequested.save()
@@ -87,9 +98,32 @@ const classroomOffline = async (req, res) => {
   }
 }
 
+//TODO: Arrumar!
+const getByType = async (req, res) => {
+    try {
+      const keyRequested = Object.keys(req.query);
+      const valueRequested = req.query[keyRequested];
+
+      const classroomRequired = await Classroom.find({keyRequested: new RegExp(valueRequested)}).select('-url');
+     
+
+      if (!classroomRequired) {
+        return res.status(404).json({message: "Não foi encontrada nenhuma sala online no momento"})
+      }
+
+      return res.status(200).json(classroomRequired)
+  
+    } catch(error){
+      res.status(500).json({
+          message: error.message
+      })
+    }
+}
+
 module.exports = {
   createClassroom,
   getAll,
   loginClassroomById,
-  classroomOffline
+  classroomOffline,
+  getByType
 }

@@ -21,7 +21,7 @@ const ClassroomSchema = new mongoose.Schema({
     max: 100, // based on Google Meet and Zoom max participants
     default: 100
   },
-  languages: {
+  language: {
     type: String,
     enum: ["c", "java", "python", "javascript", "lua", "ruby", "c++", "c#", "kotlin", "swift", "go", "dart", "rust", "php",
      ".net", "sql", "perl", "matlab", "typescript", "ada", "julia", "cobol", "r", "assembly", "groovy", "delphi", "visual basic"],
@@ -31,10 +31,6 @@ const ClassroomSchema = new mongoose.Schema({
     type: Array,
     required: true
   },
-  usersLoggedIn: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }],
   online: {
     type: Boolean,
     default: true
@@ -46,7 +42,11 @@ const ClassroomSchema = new mongoose.Schema({
   diverty: {
     type: Boolean,
     default:false
-  }
+  },
+  usersLoggedIn: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }],
 
 }, {timestamps: true})
 

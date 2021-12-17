@@ -18,6 +18,12 @@ router.post("/create", checkAuth, validator, controller.createClassroom);
  */
 router.get("/all", controller.getAll);
 
+/*@route GET /class/filter
+ *@desc List classroom based on filters
+ *@access Public
+ */
+router.get("/filter", controller.getByType);
+
 /*@route POST /class/login/:id
  *@desc 
  *@access Private

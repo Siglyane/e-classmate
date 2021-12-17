@@ -8,9 +8,11 @@ const jwt = require("jsonwebtoken")
 const createUser =  async (req, res) => {
   try{  
     const body = req.body
+
     const passwordHased = await hashPassword(body.password, res);
     body.password = passwordHased
 
+    
     const user = await Users.create(body);
     user.password = undefined;  
 
@@ -27,8 +29,11 @@ const createUser =  async (req, res) => {
 
 // Check password informed and return token
 const login = async (req, res) => {
+
   const {email, password} = req.body;
+
   try{
+   
   const userRequired = await Users.findOne({email: email}).select('+password');
 
   if (!userRequired) {
@@ -37,11 +42,14 @@ const login = async (req, res) => {
 
   const checkPassword = await bcrypt.compare(password, userRequired.password);
 
+
   if (!checkPassword) {
     return res.status(404).json({message: "Senha incorreta"})
   }
 
+
   const secret = process.env.SECRET;
+
   const token = jwt.sign(
     { id: userRequired._id}, secret)
 
