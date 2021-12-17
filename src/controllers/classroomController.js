@@ -26,10 +26,13 @@ const createClassroom = async (req, res) => {
 const loginClassroomById = async (req, res) => {
   try {
     const classroomRequested = await Classroom.findById(req.params.id);
+
     const participantsLogged = classroomRequested.usersLoggedIn;
+
     if (participantsLogged.length >= classroomRequested.maxParticipants) {
      return res.status(403).json({message: "Sala cheia, novos participants não são permitidos."})
     }
+
     participantsLogged.push(req.userId);
     await classroomRequested.save()
    
@@ -51,6 +54,9 @@ const loginClassroomById = async (req, res) => {
 const getAll = async (req, res) => {
   try {
     const classroomRequired = await Classroom.find({online: true}).populate('createdBy').select('-url').exec();
+    if (!classroomRequired) {
+      return res.status(404).json({message: "Não foi encontrada nenhuma sala online no momento"})
+    }
     return res.status(200).json(classroomRequired);
 
   } catch(error){
@@ -63,7 +69,7 @@ const getAll = async (req, res) => {
 // Change status to offline by classroom id [online: false]
 const classroomOffline = async (req, res) => {
   try {
-    const classroomRequired = await Classroom.findById(req.params);
+    const classroomRequired = await Classroom.findById(req.params.id);
 
     if(classroomRequired.createdBy != req.userId) {
       return res.status(403).json({message: "Você não possui autorização"})

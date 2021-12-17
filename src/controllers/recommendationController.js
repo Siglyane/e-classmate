@@ -1,8 +1,9 @@
+const { verifyRecommedation } = require("../helpers/validator");
 const Recommendation = require("../models/recommendation");
 const User = require("../models/user");
 
 
-// Create a recommendation based on id send
+// Create a recommendation based on user's id send
 const createRecommendation = async (req, res) => {
   try {
     const recommendation = req.body;
@@ -31,18 +32,11 @@ const createRecommendation = async (req, res) => {
   }
 }
 
+
 const updateRecommendation = async (req, res) => {
   try{
-    const recommendationRequested = await Recommendation.findById(req.params.id)
 
-    if(!recommendationRequested) {
-      return res.status(404).json({message: "Recomendação não encontrada"});
-    }
-
-    if(recommendationRequested.userRecommending != req.userId) {
-      return res.status(403).json({message: "Você não possui autorização"})
-    }
-
+    const recommendationRequested = await verifyRecommedation(req.params.id, req, res);
     recommendationRequested.recommendation = req.body.recommendation;
     recommendationRequested.save();    
 
@@ -53,9 +47,13 @@ const updateRecommendation = async (req, res) => {
   }
 }
 
+
 const deleteRecommendation = async (req, res) => {
   try{
-
+    const recommendationRequested = await verifyRecommedation(req.params.id, req, res);
+    recommendationRequested.delete();
+    
+    return res.status(200).send(recommendationRequested);
   }catch (error) {
     return res.status(500).json({message: error.message})
   }
