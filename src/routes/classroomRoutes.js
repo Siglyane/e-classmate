@@ -11,7 +11,6 @@ const { checkAuth } = require("../middlewares/auth");
  */
 router.post("/create", checkAuth, validator, controller.createClassroom);
 
-
 /*@route GET /class/all
  *@desc List all classroom
  *@access Public
@@ -24,11 +23,17 @@ router.get("/all", controller.getAll);
  */
 router.get("/filter", controller.getByType);
 
+/*@route GET /class/:id
+ *@desc Return classroom based on id
+ *@access Public
+ */
+ router.get("/:id", controller.getById);
+
 /*@route POST /class/login/:id
  *@desc 
  *@access Private
  */
-router.post("/login/:id", checkAuth, controller.loginClassroomById);
+router.patch("/login/:id", checkAuth, controller.loginClassroomById);
 
 /*@route PATCH /class/offline/:id
  *@desc 

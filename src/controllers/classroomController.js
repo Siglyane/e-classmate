@@ -77,6 +77,21 @@ const getAll = async (req, res) => {
   }
 }
 
+const getById = async (req, res) => {
+  try{
+    const requestedClassroom = await Classroom.findById(req.params.id);
+
+    if (!requestedClassroom) {
+      return res.status(404).json({message: "Sala não encontrada"})
+    }
+
+    return res.status(200).send(requestedClassroom)
+    
+  } catch(error) {
+    return res.status(500).json({message: error.message})
+  }
+}
+
 // Change status to offline by classroom id [online: false]
 const classroomOffline = async (req, res) => {
   try {
@@ -125,5 +140,6 @@ module.exports = {
   getAll,
   loginClassroomById,
   classroomOffline,
-  getByType
+  getByType,
+  getById
 }

@@ -152,7 +152,7 @@ Para construção desse projeto foi utilizado:
 | POST         | Privada   | `/class/create`         | Cadastra nova sala                                   |
 | GET          | Pública   | `/class/all`            | Retorna todas as salas online                        |
 | GET          | Pública   | `/class/filter`         | Retorna as salas conforme filtros passados           |
-| POST         | Privada   | `/class/login/:id`      | Usuário logado na API cadastra na sala               |
+| PATCH         | Privada   | `/class/login/:id`      | Usuário logado na API cadastra na sala               |
 | PATCH        | Privada   | `/class/offline/:id`    | Altera a sala para offline                           |
 
 ### Rotas recomendações

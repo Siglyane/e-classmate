@@ -27,10 +27,6 @@ const ClassroomSchema = new mongoose.Schema({
      ".net", "sql", "perl", "matlab", "typescript", "ada", "julia", "cobol", "r", "assembly", "groovy", "delphi", "visual basic"],
     required:true
   },
-  subject: {
-    type: Array,
-    required: true
-  },
   online: {
     type: Boolean,
     default: true
@@ -47,6 +43,10 @@ const ClassroomSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }],
+  subject: {
+    type: Array,
+    required: true
+  }
 
 }, {timestamps: true})
 
