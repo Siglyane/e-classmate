@@ -18,8 +18,19 @@ Cada sala possui linguagens e assuntos definidos para os usuários pesquisarem e
 
 ## Funcionalidades
 - Cadastro de estudantes e salas virtuais conforme temas de estudo.
-- Filtros de segurança para 
+- Filtro das salas por assunto e tags.
+- Criar recomendações para usuários.
 <br/><br/>
+
+## Funcionalidades Futuras
+- Login com API do Linkedin, Github, Facebook e Gmail.
+- Possibilitar as pessoas a se adicionar na rede ou favoritarem.
+- Favoritar salas.
+- Abrir para outras áreas de estudos.
+- Possibilitar que as pessoas bloqueiem usuários e denuncias.
+
+## Documentação
+Veja a documentação do POSTMAN com as Rotas e demonstrando as informações a serem passada: [Postman](https://documenter.getpostman.com/view/16821311/UVRAHSEo)
 
 ## Arquitetura
 ```
