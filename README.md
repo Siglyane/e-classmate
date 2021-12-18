@@ -8,8 +8,6 @@ Procurando por necessidades que me motivassem a contruir uma API, eu percebi uma
 Dentro da {reprograma} percebi que não é necessário estar na presença das pessoas para criar conexões e gostaria de criar um local onde todos pudessem experimentar isto, criar uma comunidade de pessoas para se apoiar e se desenvolverem juntos. 
 <br/><br/>
 
-## Sumário
-
 
 ## Descrição da API
 O projeto é uma API REST que permite o cadastro de pessoas, estas pessoas podem então criar novas "salas virtuais" ou se cadastrar em uma já criada que ainda possua espaço disponível. As se cadastrar a pessoa receberá o link que o criador da sala disponibilizou.
@@ -18,7 +16,7 @@ Cada sala possui linguagens e assuntos definidos para os usuários pesquisarem e
 <br/><br/>
 
 
-## Funcionalidades/Regras de Negócio
+## Funcionalidades
 - Cadastro de estudantes e salas virtuais conforme temas de estudo.
 - Filtros de segurança para 
 <br/><br/>
@@ -72,8 +70,10 @@ Cada sala possui linguagens e assuntos definidos para os usuários pesquisarem e
    |- 📑 server.js
    ```
 
-   ## Instalação
+## Instalação
+
 Para a instalação do projeto siga as instruções:
+
 ### Pré-requisitos
 É necesário possuir instalado as ferramentas:
 - [Git](https://git-scm.com)
