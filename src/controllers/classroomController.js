@@ -78,6 +78,7 @@ const getAll = async (req, res) => {
   }
 }
 
+// Return classroom based on id
 const getById = async (req, res) => {
   try{
     const requestedClassroom = await Classroom.findById(req.params.id);
