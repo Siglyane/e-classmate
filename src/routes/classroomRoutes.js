@@ -39,6 +39,6 @@ router.patch("/login/:id", checkAuth, controller.loginClassroomById);
  *@desc 
  *@access Private
  */
-router.patch("/offline", checkAuth, controller.classroomOffline);
+router.patch("/offline/:id", checkAuth, controller.classroomOffline);
 
 module.exports = router;
