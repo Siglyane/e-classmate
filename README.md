@@ -1,8 +1,5 @@
 # e-classmate
 
-Este README e projeto estão em desenvolvimento. 
-<br/><br/>
-
 ## Inspiração
 Esta API foi desenvolvida como Projeto Final de conclusão do curso Todas Em Tech Backend {reprograma}, a proposta era criar um API aplicando CRUD com tema livre.
 
@@ -42,10 +39,12 @@ Cada sala possui linguagens e assuntos definidos para os usuários pesquisarem e
    |
    |   |- 📁 helpers
    |       |- 📑 auth.js
+   |       |- 📑 validators.js
    |
    |   |- 📁 middlewares
    |       |- 📁 validators.js
    |           |- 📑 classroomValidator.js
+   |           |- 📑 recommendationValidator.js
    |           |- 📑 userValidator.js
    |       |- 📑 auth.js
    |

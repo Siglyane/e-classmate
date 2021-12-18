@@ -21,7 +21,6 @@ const createClassroom = async (req, res) => {
   }
 };
 
-
 // Login a classroom with currently user and return url to reunion
 const loginClassroomById = async (req, res) => {
   try {
@@ -65,7 +64,7 @@ const loginClassroomById = async (req, res) => {
 // Return all classroom online
 const getAll = async (req, res) => {
   try {
-    const classroomRequired = await Classroom.find({online: true}).populate('createdBy').select('-url').exec();
+    const classroomRequired = await Classroom.find({online: true}).select('-url -createdAt -updatedAt -__v').exec();
     if (!classroomRequired) {
       return res.status(404).json({message: "Não foi encontrada nenhuma sala online no momento"})
     }
@@ -81,7 +80,7 @@ const getAll = async (req, res) => {
 // Return classroom based on id
 const getById = async (req, res) => {
   try{
-    const requestedClassroom = await Classroom.findById(req.params.id);
+    const requestedClassroom = await Classroom.findById(req.params.id).populate('createdBy');
 
     if (!requestedClassroom) {
       return res.status(404).json({message: "Sala não encontrada"})
