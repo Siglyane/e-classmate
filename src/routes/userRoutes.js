@@ -27,7 +27,7 @@ router.get("/:id", checkAuth, controller.getById);
  *@desc Update user profile based on body
  *@access Private
  */
-router.patch("/update", checkAuth, validator, controller.updatedUSer);
+router.patch("/update", checkAuth, controller.updatedUSer);
 
 /*@route DELETE /user/delete
  *@desc Delete user profile

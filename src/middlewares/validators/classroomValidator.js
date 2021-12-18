@@ -12,8 +12,8 @@ const validateClassroom = [
   .isURL()
   .withMessage("Toda sala deve conter um link válido"),
   check("subject")
-  .trim()
-  .notEmpty(),
+  .notEmpty()
+  .withMessage("Você deve informar o assunto que estudou"),
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

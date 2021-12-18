@@ -21,6 +21,9 @@ const ClassroomSchema = new mongoose.Schema({
     max: 100, // based on Google Meet and Zoom max participants
     default: 100
   },
+  subject: {
+    type: Array
+  },
   language: {
     type: String,
     enum: ["c", "java", "python", "javascript", "lua", "ruby", "c++", "c#", "kotlin", "swift", "go", "dart", "rust", "php",
@@ -42,11 +45,7 @@ const ClassroomSchema = new mongoose.Schema({
   usersLoggedIn: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
-  }],
-  subject: {
-    type: Array,
-    required: true
-  }
+  }]
 
 }, {timestamps: true})
 

@@ -5,12 +5,10 @@ const Users = require("../models/user")
 // Create a classroom
 const createClassroom = async (req, res) => {
   try{
-    const body = req.body;
-    body.createdBy = req.userId;
-    
-    const classroom = await Classroom.create(body);
+    const classroom = await Classroom.create(req.body);
+    classroom.createdBy = req.userId;
     classroom.usersLoggedIn.push(req.userId);
-    classroom.save()
+    classroom.save();
 
     return res.status(201).json({
       message: "Sala criada com sucesso",
@@ -23,24 +21,28 @@ const createClassroom = async (req, res) => {
   }
 };
 
-//TODO: Arrumar erro
+
 // Login a classroom with currently user and return url to reunion
 const loginClassroomById = async (req, res) => {
   try {
     const classroomRequested = await Classroom.findById(req.params.id);
+    console.log(classroomRequested)
 
+    const participant = await Users.findById(req.userId);
+    console.log(req.userId)
+    console.log(participant)
 
     const participantsLogged = classroomRequested.usersLoggedIn;
 
+    
     if (participantsLogged.length >= classroomRequested.maxParticipants) {
      return res.status(403).json({message: "Sala cheia, novos participants não são permitidos."})
     }
 
-    const participant = await Users.findById(req.userId);
-
+    
     if (classroomRequested.onlyWoman == true 
       && (participant.gender != "mulher cisgênero" 
-      || participant.gender != "mulher transgênero")) {
+      && participant.gender != "mulher transgênero")) {
         return res.status(403).json({message: "Você não pode acessar esta sala"})
       }
 
@@ -51,8 +53,7 @@ const loginClassroomById = async (req, res) => {
     return res.status(200).json({
       message: "Logado com sucesso",
       url
-    });
-    
+    });  
 
   } catch (err) {
     return res.status(500).json({
@@ -113,14 +114,17 @@ const classroomOffline = async (req, res) => {
   }
 }
 
-//TODO: Arrumar!
+// Return classroom based on filter
 const getByType = async (req, res) => {
     try {
-      const keyRequested = Object.keys(req.query);
+      const keyRequested = req.query;
+      console.log(keyRequested)
       const valueRequested = req.query[keyRequested];
+      console.log(valueRequested)
 
-      const classroomRequired = await Classroom.find({keyRequested: new RegExp(valueRequested)}).select('-url');
-     
+      
+      const classroomRequired = await Classroom.find(keyRequested).select('-url').exec();
+  
 
       if (!classroomRequired) {
         return res.status(404).json({message: "Não foi encontrada nenhuma sala online no momento"})
