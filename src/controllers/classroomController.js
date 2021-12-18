@@ -25,11 +25,10 @@ const createClassroom = async (req, res) => {
 const loginClassroomById = async (req, res) => {
   try {
     const classroomRequested = await Classroom.findById(req.params.id);
-    console.log(classroomRequested)
+
 
     const participant = await Users.findById(req.userId);
-    console.log(req.userId)
-    console.log(participant)
+
 
     const participantsLogged = classroomRequested.usersLoggedIn;
 
@@ -118,9 +117,7 @@ const classroomOffline = async (req, res) => {
 const getByType = async (req, res) => {
     try {
       const keyRequested = req.query;
-      console.log(keyRequested)
       const valueRequested = req.query[keyRequested];
-      console.log(valueRequested)
 
       
       const classroomRequired = await Classroom.find(keyRequested).select('-url').exec();
