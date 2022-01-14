@@ -65,7 +65,7 @@ const getById = async (req, res) => {
     const userRequired =  await Users.findById(req.params.id, '-password').populate('recommendation');
 
     if (!userRequired) {
-      return res.status(404).json({message: "Usuário não encontrado"})
+      return res.status(200).json({message: "Usuário não encontrado"})
     }
 
     return res.status(200).json(userRequired)

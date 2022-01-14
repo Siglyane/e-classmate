@@ -65,7 +65,7 @@ const getAll = async (req, res) => {
   try {
     const classroomRequired = await Classroom.find({online: true}).select('-url -createdAt -updatedAt -__v').exec();
     if (!classroomRequired) {
-      return res.status(404).json({message: "Não foi encontrada nenhuma sala online no momento"})
+      return res.status(200).json({message: "Não foi encontrada nenhuma sala online no momento"})
     }
     return res.status(200).json(classroomRequired);
 
@@ -82,7 +82,7 @@ const getById = async (req, res) => {
     const requestedClassroom = await Classroom.findById(req.params.id).populate('createdBy').select("-url");
 
     if (!requestedClassroom) {
-      return res.status(404).json({message: "Sala não encontrada"})
+      return res.status(204);
     }
 
     return res.status(200).send(requestedClassroom)
@@ -117,14 +117,13 @@ const classroomOffline = async (req, res) => {
 const getByType = async (req, res) => {
     try {
       const keyRequested = req.query;
-      const valueRequested = req.query[keyRequested];
 
       
       const classroomRequired = await Classroom.find(keyRequested).select('-url').exec();
   
 
       if (!classroomRequired) {
-        return res.status(404).json({message: "Não foi encontrada nenhuma sala online no momento"})
+        return res.status(200).json({message: "Não foi encontrada nenhuma sala online no momento"})
       }
 
       return res.status(200).json(classroomRequired)

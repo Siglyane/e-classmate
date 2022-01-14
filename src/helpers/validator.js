@@ -7,7 +7,7 @@ exports.verifyRecommedation = async (id, req, res) => {
     const recommendation = await Recommendation.findById(id)
 
   if(!recommendation) {
-    return res.status(404).json({message: "Recomendação não encontrada"});
+    return res.status(204);
   }
 
   if(recommendation.userRecommending != req.userId) {

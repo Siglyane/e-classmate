@@ -33,6 +33,8 @@ Cada sala possui linguagens e assuntos definidos para os usuários pesquisarem e
 Veja a documentação do POSTMAN com as Rotas e demonstrando as informações a serem passada: [Postman](https://documenter.getpostman.com/view/16821311/UVRAHSEo)
 
 ## Arquitetura
+Para esta aplicação foi adotado o modelo MVC, abaixo pode verificar a organização das pastas: 
+
 ```
  📁 reprograma-e-classmate
    |
