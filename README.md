@@ -3,7 +3,7 @@
 ## Inspiração
 Esta API foi desenvolvida como Projeto Final de conclusão do curso Todas Em Tech Backend {reprograma}, a proposta era criar um API aplicando CRUD com tema livre.
 
-Procurando por necessidades que me motivassem a contruir uma API, eu percebi uma dificuldade pessol em me relacionar com colegas de cursos EAD. Antes da pandemia sempre escolhi por fazer cursos presenciais, pois a conexão com meus colegas, a troca de conhecimento, é algo essencial para mim e isto não acontecia em cursos onlines.
+Procurando por necessidades que me motivassem a contruir uma API, eu percebi uma dificuldade pessoal em me relacionar com colegas de cursos EAD. Antes da pandemia sempre escolhi por fazer cursos presenciais, pois a conexão com meus colegas, a troca de conhecimento, é algo essencial para mim e isto não acontecia em cursos onlines.
 
 Dentro da {reprograma} percebi que não é necessário estar na presença das pessoas para criar conexões e gostaria de criar um local onde todos pudessem experimentar isto, criar uma comunidade de pessoas para se apoiar e se desenvolverem juntos. 
 <br/><br/>
