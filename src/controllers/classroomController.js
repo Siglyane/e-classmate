@@ -82,13 +82,13 @@ const getById = async (req, res) => {
     const requestedClassroom = await Classroom.findById(req.params.id).populate('createdBy').select("-url");
 
     if (!requestedClassroom) {
-      return res.status(204);
+      return res.sendStatus(204);
     }
 
     return res.status(200).send(requestedClassroom)
     
   } catch(error) {
-    return res.status(500).json({message: error.message})
+    return res.status(400).json({message: error.message})
   }
 }
 
@@ -104,7 +104,7 @@ const classroomOffline = async (req, res) => {
     classroomRequired.online = false;
     classroomRequired.save();
 
-    return res.status(200).json(classroomRequired);
+    return res.status(200).json({message: 'Sala virtual offline: ', classroomRequired});
 
   } catch(error){
     res.status(500).json({

@@ -81,7 +81,6 @@ const getById = async (req, res) => {
 const updatedUSer = async (req, res) => {
   try {
     const userRequired = await Users.findById(req.userId);
-    console.log(userRequired)
     
     const {name, email, gender, sexuality} = req.body
     userRequired.name = name || userRequired.name

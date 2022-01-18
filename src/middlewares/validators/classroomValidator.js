@@ -4,13 +4,14 @@ const validateClassroom = [
   check("name")
   .trim()
   .notEmpty()
-  .isLength({min: 3})
   .withMessage("Você deve informar um nome para a sala"),
   check("url")
   .trim()
   .notEmpty()
+  .bail()
+  .withMessage("Toda sala deve conter um link")
   .isURL()
-  .withMessage("Toda sala deve conter um link válido"),
+  .withMessage("Link inválido"),
   check("subject")
   .notEmpty()
   .withMessage("Você deve informar o assunto que estudou"),

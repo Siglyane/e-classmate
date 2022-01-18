@@ -4,8 +4,10 @@ const validateUser = [
   check("name")
     .trim()
     .notEmpty()
+    .bail()
+    .withMessage("Você deve informar seu nome")
     .isLength({min: 3})
-    .withMessage("Você deve informar seu nome"),
+    .withMessage("Você deve um nome válido"),
   check("email")
     .trim()
     .notEmpty()
@@ -17,7 +19,7 @@ const validateUser = [
   check("password")
     .notEmpty()
     .isStrongPassword({
-      minLength: 8,
+      minLength: 6,
       maxLength: 20,
       minUppercase: 1,
       minLowercase: 1,
@@ -29,7 +31,7 @@ const validateUser = [
     .trim()
     .isBoolean()
     .matches(true)
-    .withMessage("Você deve aceitar os termos de uso"),
+    .withMessage("Aceite os termos de uso para continuar"),
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
